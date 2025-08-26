@@ -1,13 +1,15 @@
+mod tokenizer;
+
 use reqwest::Error;
 
 #[tokio::main]
 
 async fn main() -> Result<(), Error> {
 
-    let baseUrl:String = "https://dnd5e.wikidot.com/".to_string();
+    let base_ur:String = "https://dnd5e.wikidot.com/".to_string();
 
     // Make a GET request to the specified URL.
-    let response = reqwest::get(baseUrl+"/spells").await?;
+    let response = reqwest::get(base_ur+"/spells").await?;
 
     // Check if the request was successful (status code 200).
     if response.status().is_success() {
