@@ -103,64 +103,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        const HTML_CONTENT: &str = r#"<!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Tokenizer Test Page</title>
-              <style>
-                  body {
-                      font-family: sans-serif;
-                      margin: 20px;
-                      background-color: #f4f4f4;
-                      color: #333;
-                  }
-                  .container {
-                      max-width: 800px;
-                      margin: 0 auto;
-                      background-color: #fff;
-                      padding: 20px;
-                      border-radius: 8px;
-                      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                  }
-                  h1 {
-                      color: #0056b3;
-                  }
-                  p {
-                      line-height: 1.6;
-                  }
-                  code {
-                      background-color: #e0e0e0;
-                      padding: 2px 4px;
-                      border-radius: 3px;
-                  }
-              </style>
-          </head>
-          <body>
-              <div class="container">
-                  <!-- LessThan, GreaterThan, Identifier (html, head, body, div, p, a, img) -->
-                  <!-- ClosingTag (</div>, </body>, </html>) -->
-                  <h1>This is some sample text</h1>
-                  <p class="intro">Welcome to this <span id="test_span">simple page</span> for tokenizer testing.</p>
-                  <p>Here's a paragraph with a <a href="https://example.com" target="_blank" data-info="link">link</a>.</p>
-                  <!-- SelfClosingTagEnd (/>) -->
-                  <img src="https://placehold.co/150x50/cccccc/333333?text=Image" alt="Placeholder Image" />
-                  <br/>
-                  <!-- Attribute (class, id, href, target, data-info, src, alt) -->
-                  <!-- Equals (=) -->
-                  <!-- String ("intro", "test_span", "https://example.com", "_blank", "link", "https://placehold.co/150x50/cccccc/333333?text=Image", "Placeholder Image") -->
-                  <!-- Text (This is some sample text, Welcome to this, simple page, for tokenizer testing., Here's a paragraph with a, link, .) -->
-                  <!-- A more complex div -->
-                  <div id="dynamicContent" style="background-color: lightblue;">
-                      <p>Another paragraph inside a div.</p>
-                  </div>
-                  <p>This is the final content.</p>
-                  <!-- EOF will be at the very end of the file after </html> -->
-              </div>
-          </body>
-          </html>
-          "#;
+      const HTML_CONTENT: &str = r#"<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tokenizer Test Page</title><style>body {font-family: sans-serif;margin: 20px;background-color: #f4f4f4;color: #333;}.container {max-width: 800px;margin: 0 auto;background-color: #fff;padding: 20px;border-radius: 8px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}h1 {color: #0056b3;}p {line-height: 1.6;}code {background-color: #e0e0e0;padding: 2px 4px;border-radius: 3px;}</style></head><body><div class="container"><!-- LessThan, GreaterThan, Identifier (html, head, body, div, p, a, img) --><!-- ClosingTag (</div>, </body>, </html>) --><h1>This is some sample text</h1><p class="intro">Welcome to this <span id="test_span">simple page</span> for tokenizer testing.</p><p>Here's a paragraph with a <a href="https://example.com" target="_blank" data-info="link">link</a>.</p><!-- SelfClosingTagEnd (/>) --><img src="https://placehold.co/150x50/cccccc/333333?text=Image" alt="Placeholder Image" /><br/><!-- Attribute (class, id, href, target, data-info, src, alt) --><!-- Equals (=) --><!-- String ("intro", "test_span", "https://example.com", "_blank", "link", "https://placehold.co/150x50/cccccc/333333?text=Image", "Placeholder Image") --><!-- Text (This is some sample text, Welcome to this, simple page, for tokenizer testing., Here's a paragraph with a, link, .) --><!-- A more complex div --><div id="dynamicContent" style="background-color: lightblue;"><p>Another paragraph inside a div.</p></div><p>This is the final content.</p><!-- EOF will be at the very end of the file after </html> --></div></body></html>"#;
         
         let result = tokenize(HTML_CONTENT);
       let test_tokens = [
