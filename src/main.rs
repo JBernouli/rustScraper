@@ -1,5 +1,6 @@
 mod tokenizer;
 mod praser;
+mod buscador;
 
 use reqwest::Error;
 
