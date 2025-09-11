@@ -19,7 +19,7 @@ pub enum Node {
 
 // go through each token and make nodes
 
-pub fn graphCreator(tokens:&mut VecDeque<Tokens>) -> Node {
+pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
     // Placeholder implementation.
     let mut tag_name = String::new();
     let mut attributes: Attributes = HashMap::new();
@@ -67,7 +67,7 @@ pub fn graphCreator(tokens:&mut VecDeque<Tokens>) -> Node {
               print!("New node found so we're going to recurse\n");
               // add back less than so that it can be used in the recursive call
               tokens.push_front(Tokens::LessThan);
-              children.push(graphCreator(tokens));
+              children.push(graph_creator(tokens));
               continue; // continue to the next iteration
             }
         },
@@ -439,7 +439,7 @@ mod tests {
         },
     ];
     let mut test_tokens_deque: VecDeque<Tokens> = test_tokens.into_iter().collect();
-    let output_graph = graphCreator(&mut test_tokens_deque);
+    let output_graph = graph_creator(&mut test_tokens_deque);
 
     // assert the output graph is the same as the ast
       print!("Output Graph: {:#?}\n", output_graph);
