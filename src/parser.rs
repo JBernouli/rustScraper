@@ -1,21 +1,8 @@
 use std::collections::{HashMap, VecDeque};
 use crate::tokenizer::Tokens;
+use crate::{Node,Attributes};
 
-// A generic name-value pair for attributes.
-pub type Attributes = HashMap<String, String>;
 
-// The core Node enum. This is the heart of your AST.
-#[derive(Debug)]
-pub enum Node {
-    // Represents an HTML element (e.g., <p>, <h1>).
-    Element {
-        tag_name: String,
-        attributes: Attributes,
-        children: Vec<Node>,
-    },
-    // Represents the text content within an element.
-    Text(String),
-}
 
 // go through each token and make nodes
 
@@ -105,7 +92,7 @@ pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
         },
         _ => {
           print!("Unhandled token or end of tokens\n {:?}\n", token);
-          break;
+          continue;
         
         } // end of tokens
       }
@@ -117,7 +104,8 @@ pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
 #[cfg(test)]
 mod tests {
   use std::collections::{HashMap, VecDeque};
-  use crate::praser::*;
+  use crate::Node;
+  use crate::parser::*;
   use crate::tokenizer::Tokens;
   #[test]
   fn test_parser()

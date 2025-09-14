@@ -1,6 +1,6 @@
 use std::collections::{HashMap};
 use crate::tokenizer::Tokens;
-use crate::praser::Node;
+use crate::Node;
 
 // vamos a buscar en el árbol por una hoja specifica. 
 
@@ -64,7 +64,7 @@ pub fn find_by_text <'a> (text: &'a str, root_node: &'a Node) -> Vec<&'a Node> {
 
 mod tests{
 
-    use crate::praser::*;
+    use crate::Node;
     use crate::buscador::*;
     use lazy_static::lazy_static;
     
