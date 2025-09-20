@@ -16,10 +16,10 @@ pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
     while !tokens.is_empty() {
       // grab the first token, which should be a '<'
       let token = tokens.pop_front();
-      print!("parsing token {:?}\n", token);
+      //print!("parsing token {:?}\n", token);
       match token {
         Some (Tokens::ClosingTag) => {
-          print!("closing tag found\n");
+          //print!("closing tag found\n");
           // closing tag
           if let Some(Tokens::Identifier(name)) = tokens.pop_front() {
             // ensure the closing tag matches the opening tag
@@ -37,21 +37,21 @@ pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
         },
         Some(Tokens::GreaterThan) => {
           // end of opening tag, continue to parse children or text
-          print!("End of opening tag or closing tag found\n");
+          //print!("End of opening tag or closing tag found\n");
           continue;
         },
         Some (Tokens::LessThan) => {
             // opening tag, is it a new opening tag?
             if tag_name == "" {
               // grab the tag name
-              print!("New node found and we dont have a node yet\n");
+              //print!("New node found and we dont have a node yet\n");
               if let Some(Tokens::Identifier(name)) = tokens.pop_front() {
                 tag_name = name;
               }
             }
             else {
               // it's a new opening tag, so we need to create a new node
-              print!("New node found so we're going to recurse\n");
+              //print!("New node found so we're going to recurse\n");
               // add back less than so that it can be used in the recursive call
               tokens.push_front(Tokens::LessThan);
               children.push(graph_creator(tokens));
@@ -59,19 +59,19 @@ pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
             }
         },
         Some(Tokens::Attribute(attribute_name)) => {
-          print!("attribute found: {}\n", attribute_name);
+          //print!("attribute found: {}\n", attribute_name);
           // handle attributes
           // e.g., class="my-class"
           tokens.pop_front(); // remove '='
           if let Some(Tokens::String(value)) = tokens.pop_front() {
-            print!("attribute value found: {}\n", value);
+            //print!("attribute value found: {}\n", value);
             attributes.insert(attribute_name, value);
           }
           continue; 
         },
         Some(Tokens::SelfClosingTagEnd)=> {
           // self-closing tag, return the node
-          print!("self closing tag found\n");
+          //print!("self closing tag found\n");
           return Node::Element {
             tag_name,
             attributes,
@@ -79,19 +79,19 @@ pub fn graph_creator(tokens:&mut VecDeque<Tokens>) -> Node {
           };
         },
         Some(Tokens::EOF) => {
-          print!("got to end of File \n");
+          //print!("got to end of File \n");
           // end of file
           break;
         },
         Some(Tokens::Text(text)) => {
           
           // text content inside an element
-          print!("text found: {}\n", text);
+          //print!("text found: {}\n", text);
           children.push(Node::Text(text));
           continue;
         },
         _ => {
-          print!("Unhandled token or end of tokens\n {:?}\n", token);
+          //print!("Unhandled token or end of tokens\n {:?}\n", token);
           continue;
         
         } // end of tokens
@@ -430,7 +430,7 @@ mod tests {
     let output_graph = graph_creator(&mut test_tokens_deque);
 
     // assert the output graph is the same as the ast
-      print!("Output Graph: {:#?}\n", output_graph);
+      //print!("Output Graph: {:#?}\n", output_graph);
       fn compare_nodes(expected: &Node, actual: &Node, path: &str) {
       match (expected, actual) {
         (Node::Element { tag_name: e_tag, attributes: e_attrs, children: e_children },

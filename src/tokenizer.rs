@@ -121,7 +121,7 @@ pub fn tokenize(input: &str) -> VecDeque<Tokens> {
                   {
                     if VOID_ELEMENTS.contains(&identifier.as_str()) {
                       needs_self_closing = true;
-                      println!("Detected void element: {}", identifier);
+                      // println!("Detected void element: {}", identifier);
                     }
                     tokens.push_back(Tokens::Identifier(identifier));
                   },

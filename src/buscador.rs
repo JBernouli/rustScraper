@@ -447,7 +447,7 @@ mod tests{
         for each_node in found_node {
             if let Node::Element{tag_name,..} = each_node {
                 assert_eq!(tag_name, "div");
-                print!("Found node is correct! {}", tag_name)
+                //print!("Found node is correct! {}", tag_name)
             } else {
                 // This case should not be reached if the function works correctly.
                 panic!("Found node is not correct! {:?}", each_node);

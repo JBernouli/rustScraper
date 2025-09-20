@@ -54,8 +54,8 @@ mod tests {
         assert!(result.is_ok());
         let graph = result.unwrap();
         let targets = find_by_tag_name("p", &graph);
-        print!("The targets are \n{:?}\n", targets);
-        print!("the graph is \n {:?} \n", graph);
+        //print!("The targets are \n{:?}\n", targets);
+        //print!("the graph is \n {:?} \n", graph);
         assert_eq!(targets.len(), 2);
         for each_target in targets
         {
